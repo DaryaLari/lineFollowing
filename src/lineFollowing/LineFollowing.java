@@ -22,8 +22,8 @@ public class LineFollowing {
 
 
     public void followLine(){
-        int speed = 250;
-        final double kp = 150, kd = 5, ki = 5;
+        int speed = 200;
+        final double kp = 170, kd = 30, ki = 0.1;
         double correction = 0;
         double prevError = 0, error = 0, integral = 0, derivative = 0;
         while(true) {
