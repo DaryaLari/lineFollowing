@@ -23,7 +23,7 @@ public class LineFollowing {
 
     public void followLine(){
         int speed = 200;
-        final double kp = 170, kd = 50, ki = 0.2;
+        final double kp = 200, kd = 30, ki = 0.1;
         double correction = 0;
         double prevError = 0, error = 0, integral = 0, derivative = 0;
         while(true) {
@@ -31,7 +31,7 @@ public class LineFollowing {
             rightSample.fetchSample(sampleResults, 1);
             System.out.println(sampleResults[0] + " " + sampleResults[1]);
 
-            error = sampleResults[0] - sampleResults[1];
+            error = sampleResults[1] - sampleResults[0];
             integral += error;
             derivative = error - prevError;
             prevError = error;
@@ -40,8 +40,8 @@ public class LineFollowing {
 
             leftMotor.synchronizeWith(new RegulatedMotor[]{rightMotor});
             leftMotor.startSynchronization();
-            leftMotor.setSpeed(speed - (int)correction);
-            rightMotor.setSpeed(speed + (int)correction);
+            leftMotor.setSpeed(speed + (int)correction);
+            rightMotor.setSpeed(speed - (int)correction);
             leftMotor.forward();
             rightMotor.forward();
             leftMotor.endSynchronization();
